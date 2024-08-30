@@ -1,0 +1,97 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<DoAn_DAPM.Models.SanPham>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/style.css" />
+<link rel="stylesheet" href="~/Content/bootstrap.css" />
+<script src="https://cdn.jsdelivr.net/npm/ionicons@5/dist/ionicons.js"></script>
+
+<div class="banner">
+    <img src="~/Content/images/banner3.png" alt="Banner 1">
+</div>
+<div class="xanh">
+    <div class="khoi">
+        <ion-icon name="airplane-outline"></ion-icon><br>
+        <span class="khoi_text">GIAO HÀNG TOÀN QUỐC </span>
+        <p>
+            Miễn phí vận chuyển với các đơn hàng trị giá trên 2.000.000Đ
+        </p>
+    </div>
+    <div class="khoi">
+        <ion-icon name="call-outline"></ion-icon><br>
+        <span class="khoi_text">HỖ TRỢ ONLINE 24/24 </span>
+        <p>
+            Luôn hỗ trợ khách hàng 24/24 tất cả các ngày trong tuầnx
+        </p>
+    </div>
+    <div class="khoi">
+        <ion-icon name="airplane-outline"></ion-icon><br>
+        <span class="khoi_text">
+            ĐỖI HÀNG DỄ DÀNG
+        </span>
+        <p>
+            Miễn phí đổi trả trong vòng 30 ngày đầu tiên cho tất cả các mặt hàng
+        </p>
+    </div>
+    <div class="khoi">
+        <ion-icon name="gift-outline"></ion-icon><br>
+        <span class="khoi_text">QUÀ TẶNG HẤP DẪN </span>
+        <p>
+            Chương trình khuyễn mãi cực lớn và hấp dẫn hàng tháng
+
+        </p>
+    </div>
+</div>
+<div class="tieude">
+    <h1>Sản phẩm mới</h1>
+</div>
+<section class="featured-products">
+    @foreach (var sanPham in Model.Take(8))
+    {
+        <div class="product">
+            @foreach (var anh in sanPham.SanPham_Anh)
+            {
+                <a href="@Url.Action("Details", "Sanpham", new { idx = sanPham.MaSP })">
+                    <img src="@anh.Anh" alt="@sanPham.TenSP" />
+                </a>
+            }
+            <p>@sanPham.TenSP</p>
+            <span>Giá: @string.Format("{0:0,0}", sanPham.GiaSP) VNĐ </span>
+        </div>
+    }
+</section>
+<div class="pagination-wrapper">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 2
+        })
+</div>
+<div class="tieude">
+    <h1>Sản phẩm bán chạy nhất</h1>
+</div>
+<section class="featured-products">
+    @foreach (var sanPham in ViewBag.SanPhamNoiBat)
+    {
+        <div class="product">
+            @foreach (var anh in sanPham.SanPham_Anh)
+            {
+                <a href="@Url.Action("Details", "Sanpham", new { idx = sanPham.MaSP })">
+                    <img src="@anh.Anh" alt="@sanPham.TenSP" />
+                </a>
+            }
+            <p>@sanPham.TenSP</p>
+            <span>Giá: @string.Format("{0:0,0}", sanPham.GiaSP) VNĐ </span>
+        </div>
+    }
+</section>
+
+
+
+
+
+

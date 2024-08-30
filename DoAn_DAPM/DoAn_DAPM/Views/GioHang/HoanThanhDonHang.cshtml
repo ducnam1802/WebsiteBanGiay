@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "HoanThanhDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/style.css" />
+<link rel="stylesheet" href="~/Content/bootstrap.css" />
+<script src="https://cdn.lordicon.com/lordicon-1.2.0.js"></script>
+
+<style>
+    .confirmation-container {
+        text-align: center;
+        max-width: 600px;
+        margin: 20px auto 50px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .confirmation-message {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #666;
+    }
+
+    .confirmation-container h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .confirmation-container a.btn {
+        font-size: 16px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        .confirmation-container a.btn:hover {
+            background-color: #555;
+            border-color: #555;
+        }
+
+    .confirmation-image {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
+
+    .text-center p {
+        color: black
+    }
+</style>
+
+<lord-icon src="https://cdn.lordicon.com/igciyimj.json"
+           trigger="hover"
+           stroke="bold"
+           style="width:250px;height:250px; margin-left:42%">
+</lord-icon>
+
+<div class="confirmation-container">
+    <h2>Đơn hàng của bạn đã được ghi nhận,<br>chúng tôi sẽ liên hệ trong thời gian sớm nhất.</h2>
+    <a href="@Url.Action("Index","Home")" class="btn btn-dark">Quay về trang chủ</a>
+</div>

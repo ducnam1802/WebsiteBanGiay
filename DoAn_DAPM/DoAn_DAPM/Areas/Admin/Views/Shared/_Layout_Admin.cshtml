@@ -1,0 +1,61 @@
+﻿@using DoAn_DAPM.Models
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/admin.css" rel="stylesheet" />
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->        
+            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+                @if (Session["Admin"] != null)
+                {
+                    NhanVien tv = (NhanVien)Session["Admin"];
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle admin-name" href="#" id="navbardrop" data-toggle="dropdown">
+                           @tv.TenAd
+                        </a>
+                    </li>
+                }
+                <ul class="nav flex-column">
+                    <content class="logo2">
+                        <a href="#"> <img src="~/Content/images/logo3.png" alt="Logo của bạn" /></a>
+                    </content>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index","Hang")"><i class="fa fa-tags"></i> Thương Hiệu </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index","Product")"><i class="fa fa-cog"></i> Quản Lý Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index","KhachHang")"><i class="fa fa-users"></i> Quản Lý Khách Hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index","DonHang")"><i class="fa fa-tags"></i> Quản Lý Đơn Hàng </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- Main content -->
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>

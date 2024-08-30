@@ -1,0 +1,51 @@
+﻿@model DoAn_DAPM.Models.NhanVien
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/css/style.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            margin-top: 5px;
+        }
+
+        .container1 {
+            width: 100%; 
+            max-width: 400px; 
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center" style="min-height: 100vh"> 
+    <div class="container1">
+        <div class="card card-login mt-3">
+            <div class="card-header" style="margin-right: 5px"><h3>Đăng Nhập</h3></div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="control-label col-md-10">
+                    <div class="form-group">
+                        <label for="exampleInputTaiKhoan1"><h5>Tên Đăng Nhập</h5></label>
+                        @Html.TextBoxFor(u => u.TaiKhoan, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.TaiKhoan)
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1"><h5>Mật khẩu</h5></label>
+                        @Html.PasswordFor(u => u.MatKhau, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.MatKhau)
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Đăng Nhập" style="margin-top:10px" />
+                </div>
+            }           
+        </div>
+    </div>
+</body>
+</html>

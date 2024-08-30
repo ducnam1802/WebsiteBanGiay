@@ -1,0 +1,88 @@
+﻿@model DoAn_DAPM.Models.NguoiDung
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/style.css" />
+<link rel="stylesheet" href="~/Content/bootstrap.css" />
+
+
+<div class="container1">
+    <div class="card card-register mx-auto mt-3">
+        <h3 class="card-header">Đăng kí tài khoản</h3>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.Label("Họ tên", htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TenNguoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenNguoiDung, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Tên tài khoản", htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TenDangNhap, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenDangNhap, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Mật khẩu", htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(u => u.MatKhau, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Số ĐT", htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Địa chỉ", htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Đăng ký" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <div class="control-label col-md-7">
+                    Bạn đã có tài khoản
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="@Url.Action("Login", "Account")"><input class="btn btn-primary btn-block" value="Đăng Nhập" /></a>
+                    <br />
+                </div>
+                <div class="control-label col-md-7">
+                    <a href="@Url.Action("Index","Home")">Quay Lại</a>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+

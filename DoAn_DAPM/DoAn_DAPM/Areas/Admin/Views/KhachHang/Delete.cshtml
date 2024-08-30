@@ -1,0 +1,26 @@
+﻿@model DoAn_DAPM.Models.NguoiDung
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/admin.css" />
+<link rel="stylesheet" href="~/Content/css/bootstrap.css" />
+<link rel="stylesheet" href="~/Content/css/style.css" />
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">Xóa khách hàng</li>
+</ol>
+
+<h3>Bạn có chắc chắn muốn xóa?</h3>
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

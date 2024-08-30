@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DoAn_DAPM.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/admin.css" />
+<link rel="stylesheet" href="~/Content/css/bootstrap.css" />
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item custom-title">Danh sách sản phẩm</li>
+</ol>
+<p>
+    <a href="@Url.Action("Create")" class="add-customer-button">Thêm sản phẩm</a>
+</p>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã Sản Phẩm</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Ảnh</th>
+                    <th>Giá Sản Phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Mô tả</th>
+                    <th>Kích cỡ</th>
+                    <th>Thương Hiệu</th>
+                    <th>Màu sắc</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.MaSP)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TenSP)</td>
+                        <td>
+                            @if (item.SanPham_Anh.Any())
+                            {
+                                var firstImage = item.SanPham_Anh.First();
+                                <img src="@firstImage.Anh" alt="@item.TenSP" style="width:70px; height:70px" />
+                            }
+                        </td>
+                        <td>@item.GiaSP.ToString("N0", new System.Globalization.CultureInfo("vi-VN")) đ</td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.MoTA</td>
+                        <td>@item.KichCo.KichCo1</td>
+                        <td>@item.ThuongHieu.TenThuongHieu</td>
+                        <td>@item.MauSac.TenMauSac</td>
+                        <td class="action-buttons">
+                            <a href="@Url.Action("Edit", new { id = item.MaSP })" class="btn btn-sm btn-warning">Sửa</a>
+                            <a href="@Url.Action("Delete", new { id = item.MaSP })" class="btn btn-sm btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int pageNum = 1; pageNum <= ViewBag.TotalPages; pageNum++)
+            {
+                <li class="page-item @(pageNum == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = pageNum })">@pageNum</a>
+                </li>
+            }
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

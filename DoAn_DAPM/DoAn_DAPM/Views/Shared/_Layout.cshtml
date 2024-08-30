@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>DUC NAM Store</title>
+    <link rel="stylesheet" href="~/Content/css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="@Url.Action("Index", "Home")"> <img src="~/Content/images/logo3.png" alt="Logo của bạn" /></a>
+        </div>
+        <div class="search-container">
+            <div class="search-box">
+                <input id="searchInput" type="text" placeholder="Tìm kiếm...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="search-results">
+                <ul class="search-results-list">
+                    <!-- Kết quả tìm kiếm sẽ được hiển thị ở đây -->
+                </ul>
+            </div>
+        </div>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                    <li class="dropdown">
+                        <a href="#">Sản phẩm</a>
+                        <div class="dropdown-content">
+                            <a href="@Url.Action("TheoThuongHieu", "SanPham", new { MaThuongHieu = 1 })">Nike</a>
+                            <a href="@Url.Action("TheoThuongHieu", "SanPham", new { MaThuongHieu = 2 })">Adidas</a>
+                            <a href="@Url.Action("TheoThuongHieu", "SanPham", new { MaThuongHieu = 3 })">Convert</a>
+                        </div>
+                    </li>
+                    <li class="ml-auto">
+                        @Html.Action("GioHangPartial", "GioHang")
+                    </li>
+                    @if (Session["KH"] != null)
+                    {
+                        DoAn_DAPM.Models.NguoiDung kh = (DoAn_DAPM.Models.NguoiDung)Session["KH"];
+                        <li class="dropdown">
+                            <a>@kh.TenNguoiDung</a>
+                            <div class="dropdown-content">
+                                <a href="@Url.Action("DanhSachDonHang","Account")">Đơn hàng</a>
+                                <a href="@Url.Action("CaNhan", "Account")">Sửa thông tin</a>
+                                <a onclick="return confirm('Bạn có thực sự muốn đăng xuất ?');" href="@Url.Action("Logout", "Account")">Đăng Xuất</a>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a href="#">Khách hàng</a>
+                            <div class="dropdown-content">
+                                <a href="@Url.Action("Login", "Account")">Đăng nhập</a>
+                                <a href="@Url.Action("Register", "Account")">Đăng ký</a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </header>
+    @RenderBody()
+
+    <!-- Footer -->
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Hỗ trợ khách hàng</h3>
+                        <ul>
+                            <li>Chăm sóc khách hàng</li>
+                            <li>Thanh toán</li>
+                            <li>Hướng dẫn đặt hàng</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Thông tin liên hệ</h3>
+                        <ul>
+                            <li>Địa chỉ: 100 Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Tp.HCM</li>
+                            <li>SĐT: 0367590203</li>
+                            <li>Email: vuducnam180203@gmail.com</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Chính sách</h3>
+                        <ul>
+                            <li>Chế độ bảo hành</li>
+                            <li>Chính sách đổi hàng</li>
+                            <li>Bảo mật thông tin</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social">
+                        <p class="mangxahoi">Mạng Xã Hội</p>
+                        <a href="https://www.facebook.com/profile.php?id=100065822105187"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">Bản quyền bởi Đức Nam © 2023</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var searchInput = document.querySelector("#searchInput");
+        var sanphams = document.querySelector(".featured-products").querySelectorAll(".product > p");
+    var searchResultsList = document.querySelector(".search-results-list");
+
+    searchInput.addEventListener("input", function () {
+        var searchTerm = searchInput.value.trim().toLowerCase();
+        var searchResults = [];
+
+        sanphams.forEach(function (sanpham) {
+            var sanphamName = sanpham.textContent.toLowerCase();
+
+            if (sanphamName.includes(searchTerm)) {
+                var productDiv = sanpham.closest(".product");
+                var sanphamImageSrc = productDiv.querySelector("a > img").src;
+                var productId = productDiv.querySelector("a").href.split('=')[1];
+                var sanphamPrice = productDiv.querySelector("span").textContent;
+
+                searchResults.push({
+                    title: sanpham.textContent,
+                    imageSrc: sanphamImageSrc,
+                    productId: productId,
+                    price: sanphamPrice
+                });
+            }
+        });
+
+        displaySearchResults(searchResults);
+    });
+
+    function displaySearchResults(results) {
+        searchResultsList.innerHTML = "";
+
+        if (searchInput.value.trim() === "") {
+            searchResultsList.style.display = "none";
+            return;
+        } else {
+            searchResultsList.style.display = "block";
+
+            if (results.length === 0) {
+                var noResultsItem = document.createElement("li");
+                noResultsItem.textContent = "Không tìm thấy sản phẩm.";
+                searchResultsList.appendChild(noResultsItem);
+            } else {
+                results.forEach(function (result) {
+                    var listItem = document.createElement("li");
+                    var clickableDiv = document.createElement("div");
+                    clickableDiv.onclick = function () {
+                        window.location.href = "@Url.Action("Details", "Sanpham")?idx=" + result.productId;
+                    };
+                    clickableDiv.style.cursor = "pointer";
+
+                    var image = document.createElement("img");
+                    image.src = result.imageSrc;
+                    image.alt = result.title;
+                    clickableDiv.appendChild(image);
+
+                    var title = document.createElement("span");
+                    title.textContent = result.title;
+                    clickableDiv.appendChild(title);
+
+
+                    listItem.appendChild(clickableDiv);
+                    searchResultsList.appendChild(listItem);
+                });
+            }
+        }
+    }
+});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+﻿@model DoAn_DAPM.Models.DonHang
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/style.css" />
+<link href="~/Scripts/bootstrap.js" />
+
+<div class="container mt-4">
+    <div class="card">
+        <a href="@Url.Action("DanhSachDonHang","Account")"> < Quay lại</a>
+        <div class="card-header">
+            <h2>Chi Tiết Đơn Hàng</h2>
+        </div>
+        <div class="card-body">
+            <h3 class="mb-4">Thông Tin Người Dùng</h3>
+            <p><strong>Tên:</strong> @Model.NguoiDung.TenNguoiDung</p>
+            <p><strong>Email:</strong> @Model.NguoiDung.Email</p>
+            <p><strong>Địa Chỉ:</strong> @Model.NguoiDung.DiaChi</p>
+
+            <h3 class="my-4">Sản Phẩm Mua</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Mã Sản Phẩm</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Màu sắc</th>
+                        <th>Kích cỡ</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng hóa đơn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var chiTiet in Model.ChiTietDonHangs)
+                    {
+                        <tr>
+                            <td>@chiTiet.MaSP</td>
+                            <td>
+                                @if (chiTiet.SanPham.SanPham_Anh.Any())
+                                {
+                                    var firstImage = chiTiet.SanPham.SanPham_Anh.First();
+                                    <img src="@firstImage.Anh" alt="@chiTiet.SanPham.TenSP" style="width:100px; height:100px" />
+                                }
+                            </td>
+                            <td>@chiTiet.SanPham.TenSP</td>
+                            <td>@chiTiet.SanPham.MauSac.TenMauSac</td>
+                            <td>@chiTiet.SanPham.KichCo.KichCo1</td>
+                            <td>@chiTiet.SoLuong</td>
+                            <td>
+                                <span style="font-weight:bold; text-align:right; color:red;">@string.Format("{0:0,0}", @chiTiet.Gia)</span>
+                                <a style="color: red; margin-bottom: 0; font-weight: bold">VND</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

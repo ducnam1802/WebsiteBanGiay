@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DoAn_DAPM.Models.DonHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/admin.css" />
+<link rel="stylesheet" href="~/Content/css/bootstrap.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" id="error-alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="success-alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item custom-title">Danh sách đơn hàng</li>
+</ol>
+
+<div class="card-body">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Đơn hàng
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã Đơn Hàng</th>
+                    <th>Tên người đặt</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày Đặt Hàng</th>
+                    <th>Ngày Giao Hàng</th>
+                    <th>Tình Trạng</th>
+                    <th>Chi Tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaDonHang</td>
+                        <td>@item.NguoiDung.TenNguoiDung</td>
+                        <td>@item.NguoiDung.SDT</td>
+                        <td>@item.NgayXuatDon.ToString("dd/MM/yyyy")</td>
+                        <td>@item.NgayDuKien.ToString("dd/MM/yyyy")</td>
+                        <td>@item.TinhTrang</td>
+                        <td>
+                            <a href="@Url.Action("ChiTietDH", "DonHang", new { id = item.MaDonHang })" class="btn btn-primary btn-sm">
+                                <span>Chi tiết</span>
+                            </a>
+                            <a href="@Url.Action("XacNhanDonHang", new { id = item.MaDonHang })" class="btn btn-success btn-sm">
+                                Xác nhận
+                            </a>
+                            <a href="javascript:;" onclick="if(confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) { window.location.href='@Url.Action("XoaDon", new { id = item.MaDonHang })'; }" class="btn btn-danger btn-sm">
+                                Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#success-alert").slideUp(500);
+        });
+
+        $("#error-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#error-alert").slideUp(500);
+        });
+    });
+</script>

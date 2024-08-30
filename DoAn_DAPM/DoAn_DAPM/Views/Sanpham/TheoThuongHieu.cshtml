@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DoAn_DAPM.Models.SanPham>
+@{
+    ViewBag.Title = "Thương Hiệu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/style.css" />
+<link rel="stylesheet" href="~/Content/bootstrap.css" />
+
+
+<h3 class="card-header">
+    Thương hiệu: @ViewBag.TenThuongHieu
+</h3>
+<section class="featured-products">
+    @foreach (var sanPham in Model.Take(8))
+    {
+        <div class="product">
+            @foreach (var anh in sanPham.SanPham_Anh)
+            {
+                <a href="@Url.Action("Details", "Sanpham", new { idx = sanPham.MaSP })">
+                    <img src="@anh.Anh" alt="@sanPham.TenSP" />
+                </a>
+            }
+            <p>@sanPham.TenSP</p>
+            <span>Giá: @string.Format("{0:0,0}", sanPham.GiaSP) VNĐ </span>
+        </div>
+    }
+</section>
+
